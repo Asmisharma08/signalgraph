@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: signalgraph-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SUPABASE_JWT_SECRET
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false
+      - key: REPLAY_MODE
+        value: "true"
+      - key: POLL_INTERVAL_SECONDS
+        value: "30"
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: AI_BRIEF_ENABLED
+        value: "true"
